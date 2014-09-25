@@ -465,6 +465,94 @@ print nab_v ; nab_v.view()
 
 print nabla.torsion() ; nabla.torsion().view()
 
+print nabla.riemann() ; nabla.riemann().view()
+
+# consider a non-flat metric, change g_{rr}
+
+g[Y.frame(), 1,1, Y] = 1/(1+r^2)
+g.view(Y.frame(), Y)
+
+# For convenience, change default chart on domain U to Y
+U.set_default_chart(Y)
+
+g.view(Y.frame())
+
+g.view(X_U.frame(), X_U)
+
+g[X_U.frame(), : , X_U]
+
+g.add_comp_by_continuation(X.frame(),U,X)
+g.view()
+
+nabla = g.connection()
+
+nabla.coef()[:]
+
+nabla.coef(Y.frame())[:]
+
+Riem = nabla.riemann()  # this took a while for my computer
+print Riem ; Riem.view(Y.frame())
+
+Ric = g.ricci()
+print Ric ; Ric.view(Y.frame())
+
+# Weyl tensor 
+C = g.weyl() # this took a while for my computer to run, but not as long as Riem
+print C ; C.view()
+
+R = g.ricci_scalar()
+print R ; R.view()
+
+# Tensor transformations induced by a metric
+
+print t
+t.view()
+t.view(X_U.frame(), X_U)
+
+# Raising the last index of T with g
+s = t.up(g, 2)
+print s
+
+s = t.up(g)
+print s
+
+s = t.down(g)
+print s
+
+#
+# Hodge duality
+# 
+
+epsilon = g.volume_form()
+print epsilon ; epsilon.view()
+
+epsilon.view(Y.frame())
+
+print f ; f.view()
+
+sf = f.hodge_star(g)
+print sf ; sf.view()
+
+sf == f * epsilon.restrict(U)
+
+print om ; om.view()
+
+som = om.hodge_star(g)
+print som ; som.view()
+
+print a
+
+sa = a.hodge_star(g)
+print sa ; sa.view()
+
+print da ; da.view()
+sda = da.hodge_star(g)
+print sda ; sda.view()
+
+sf.hodge_star(g) == f
+som.hodge_star(g) == om
+sa.hodge_star(g) == a
+sda.hodge_star(g) == da
 
 
 
