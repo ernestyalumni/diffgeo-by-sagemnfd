@@ -11,7 +11,8 @@
 #
 # Fund Science! & Help Ernest finish his Physics Research! : quantum super-A-polynomials - Ernest Yeung
 #                                               
-# http://igg.me/at/ernestyalumni2014                                                                             
+#
+# ernestyalumni.tilt.com 
 #                                                              
 # Facebook     : ernestyalumni  
 # github       : ernestyalumni                                                                     
@@ -20,7 +21,6 @@
 # tumblr       : ernestyalumni                                                               
 # twitter      : ernestyalumni                                                             
 # youtube      : ernestyalumni                                                                
-# indiegogo    : ernestyalumni                                                                        
 # 
 # Ernest Yeung was supported by Mr. and Mrs. C.W. Yeung, Prof. Robert A. Rosenstone, Michael Drown, Arvid Kingl, Mr. and Mrs. Valerie Cheng, and the Foundation for Polish Sciences, Warsaw University.  
 #
