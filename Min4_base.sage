@@ -88,14 +88,14 @@ R4 = Manifold(4,'R4',r'\mathbb{R}^4',start_index=0)
 cart.<t,x,y,z> = R4.chart() # "flat chart"
 
 
-U = R4.open_subset('U',coord_def={cart: (x!=0,y!=0,z!=0)})
+U = R4.open_subset('U',coord_def={cart: [x!=0,y!=0,z!=0]})  # [x!=0 AND y!=0 AND z!=0]
 
 cart_U = cart.restrict(U)
-sph.<t,r,th,ph> = U.chart(r't:(-oo,oo) r:(0,+oo) th:(0,pi):\theta ph:(0,2*pi):\phi') 
+sph.<t,r,ph,th> = U.chart(r't:(-oo,oo) r:(0,+oo) ph:(0,2*pi):\phi th:(0,pi):\th') 
 cyl.<t,r,ph,z>  = U.chart(r't:(-oo,oo) r:(0,+oo) ph:(0,2*pi):\phi z:(-oo,oo)')
 
 transit_sph_to_cart = sph.transition_map(cart_U,[t,r*sin(th)*cos(ph),r*sin(th)*sin(ph),r*cos(th)])
-transit_cart_to_sph = transit_sph_to_cart.set_inverse(t,sqrt(x^2+y^2+z^2), atan2(sqrt(x^2+y^2),z), atan2(y,x))
+transit_cart_to_sph = transit_sph_to_cart.set_inverse(t,sqrt(x^2+y^2+z^2), atan2(y,x), atan2(sqrt(x^2+y^2),z))
 
 transit_cyl_to_cart = cyl.transition_map(cart_U,[t,r*cos(ph), r*sin(ph), z] )
 transit_cart_to_cyl = transit_cyl_to_cart.set_inverse(t,sqrt(x^2+y^2), atan2( y,x), z)
@@ -117,10 +117,12 @@ g.display()
 g.display(sph.frame(), sph) # g = -dt*dt + dr*dr + r^2 dth*dth + r^2*sin(th)^2 dph*dph
 g.display(cyl.frame(), cyl) # g = -dt*dt + dr*dr + r^2 dph*dph + dz*dz # EY : 20141221 !!! This is great stuff
 
+g_U = U.lorentz_metric('g_U')
+g_U[0,0], g_U[1,1], g_U[2,2], g_U[3,3] = -1, 1, 1, 1
 
 nabla = g.connection()
-print nabla ; nabla
-nabla.coef()[:]
+# print nabla ; nabla
+# nabla.coef()[:]
 
 
 #
